@@ -24,9 +24,7 @@ export default class MovieList extends Component {
     let { show, currentMovie } = this.state;
     return (
       <div>
-        <MoviesRow handleOpenModal={this.handleOpenModal} query={"Batman"} />
-        <MoviesRow handleOpenModal={this.handleOpenModal} query={"Life"} />
-        <MoviesRow handleOpenModal={this.handleOpenModal} query={"Harry"} />
+        <MoviesRow handleOpenModal={this.handleOpenModal} query={"List of movies:"} />
     
           <ModalMovie
             handleClose={this.handleCloseModal}

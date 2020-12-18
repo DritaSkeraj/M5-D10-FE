@@ -12,7 +12,7 @@ export default class MoviesRow extends Component {
     sorted: true,
   };
   componentDidMount = async () => {
-    await this.fetchMovies(this.props.query);
+    await this.fetchMovies();
     console.log(this.state.movies);
   };
   // componentDidMount = async () => {
@@ -28,16 +28,16 @@ export default class MoviesRow extends Component {
     this.setState({ movies: moviesByYear, sorted: true });
   };
 
-  fetchMovies = async (q) => {
-    let baseUrl = `http://www.omdbapi.com/?`;
-    let apiKey = `apikey=e88d2a55&`;
+  fetchMovies = async () => {
+    let baseUrl = `http://127.0.0.1:3000/media`;
+    {/*let apiKey = `apikey=e88d2a55&`;*/}
     try {
-      let res = await fetch(`${baseUrl}s=${q}&${apiKey}`, {
+      let res = await fetch(`${baseUrl}`, {
         method: "GET",
       });
       if (res.ok) {
         let data = await res.json();
-        this.setState({ movies: data.Search });
+        this.setState({ movies: data });
       }
     } catch (e) {
       console.log(e);

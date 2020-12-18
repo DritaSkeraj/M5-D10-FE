@@ -125,16 +125,20 @@ class SinlgeMoviePage extends Component {
           </Col>
         </Row>
         <Row>
+          <Col md={6}>
           <CommentsList
             movieId={currentMovie.imdbID}
             updateComState={this.state.updateComments}
             updateComments={this.updateComments}
           />
+          </Col>
+          <Col md={6}>
           <AddComment
             img={currentMovie.Poster}
             movieId={currentMovie.imdbID}
             updateComments={this.updateComments}
           />
+          </Col>
         </Row>
         {/* <Row>
           <div className="d-flex align-items-center mr-3 nav__search my-4">

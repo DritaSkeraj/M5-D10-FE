@@ -19,13 +19,16 @@ class CommentsList extends React.Component {
           if (prevProp.movieId !== this.props.movieId) {
               await this.setState({ movieId: this.props.movieId });
               await this.fetchComments();
-              console.log(this.state.comments);
           }
           if (this.state.updateComment == true) {
+              this.setState({comments: []})
               await this.fetchComments();
               this.setState({ updateComment: false })
-
           }
+          if (this.state.updateComment != prevState.updateComment) {
+            await this.fetchComments();
+            this.setState({ updateComment: false })
+        }
           if (this.props.updateComState ) {
             await this.fetchComments();
             this.props.updateComments(false);
@@ -37,18 +40,18 @@ class CommentsList extends React.Component {
     let { movieId } = this.state;
     try {
       let response = await fetch(
-        "https://striveschool-api.herokuapp.com/api/comments/" + movieId,
-        {
+        `http://127.0.0.1:3000/reviews/${movieId}`, //+ movieIdtt0120737
+        /*{
           headers: {
             Authorization:
               "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmI2N2JhNTk4MzViMDAwMTc1ODRlZmMiLCJpYXQiOjE2MDU3OTQ3MjUsImV4cCI6MTYwNzAwNDMyNX0.ZBxn9E-dluFBsGqKAIwygPI84Tzr0ZI6d9U_RszFQw0",
           },
-        }
+        }*/
       );
       let comments = await response.json();
       this.setState({ comments: comments, loading: false });
     } catch (e) {
-      console.log("error happened, that's life", e);
+      console.log("ERROR:", e);
       this.setState({ loading: false });
     }
   };
@@ -57,22 +60,23 @@ class CommentsList extends React.Component {
     let objToDelete = id;
     try {
       let response = await fetch(
-        "https://striveschool-api.herokuapp.com/api/comments/" +
-          objToDelete,
+        `http://127.0.0.1:3000/reviews/${objToDelete}`,
         {
           method: "DELETE",
-          headers: {
-            Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmI2N2JhNTk4MzViMDAwMTc1ODRlZmMiLCJpYXQiOjE2MDU3OTQ3MjUsImV4cCI6MTYwNzAwNDMyNX0.ZBxn9E-dluFBsGqKAIwygPI84Tzr0ZI6d9U_RszFQw0",
-          },
+          headers: new Headers({
+            "Content-Type": "application/json",
+          }),
         }
       );
-      let deletedComment = await response.json();
-        console.log(response);
+      
+       await response.json();
+       this.setState({updateComment:true})
+
         if (response.ok) {
             this.setState({updateComment:true})
-        } else{}
-      // let newComments = this.state.comments.splice(index, 1);
+            console.log('response is ok: ', response)
+        } else{
+        }
 
       let newComments = this.state.comments.filter(
         (obj) => obj !== objToDelete

@@ -9,7 +9,6 @@ class AddComment extends React.Component {
       comment: {
         comment: "",
         rate: 0,
-        elementId: "",
       },
       errMessage: "",
       loading: false,
@@ -27,7 +26,7 @@ class AddComment extends React.Component {
     console.log("currentId: ", currentId);
     //reservation['phone'] --> reservation.phone = '3'
       comment[currentId] = e.currentTarget.value;
-      comment.elementId = this.state.movieId;
+      //comment.elementId = this.state.movieId;
       console.log(this.state.movieId)
       this.setState({ comment: comment });
       console.log(this.state.comment)
@@ -39,25 +38,25 @@ class AddComment extends React.Component {
     this.setState({ loading: true });
     try {
       let response = await fetch(
-        "https://striveschool-api.herokuapp.com/api/comments/",
+        `http://127.0.0.1:3000/reviews/${movieId}`,
         {
           method: "POST",
           body: JSON.stringify(this.state.comment),
+          
           headers: new Headers({
-            Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmI2N2JhNTk4MzViMDAwMTc1ODRlZmMiLCJpYXQiOjE2MDU3OTQ3MjUsImV4cCI6MTYwNzAwNDMyNX0.ZBxn9E-dluFBsGqKAIwygPI84Tzr0ZI6d9U_RszFQw0",
             "Content-Type": "application/json",
           }),
         }
       );
-      console.log("POST response, ", response);
+      console.log("POST response, ", response.json());
+      
+      console.log("this.state.comment::::::", this.state.comment)
       if (response.ok) {
         alert("yayyyy! commented successfully!");
         this.setState({
           comment: {
             comment: "",
-            rate: 0,
-            elementId: "",
+            rate: 0
           },
           errMessage: "",
           loading: false,
