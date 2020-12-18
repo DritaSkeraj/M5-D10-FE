@@ -30,7 +30,7 @@ export default class ModalMovie extends Component {
     }
 
   fetchMovies = async (q) => {
-    let baseUrl = `http://www.omdbapi.com/?`;
+    let baseUrl = `https://www.omdbapi.com/?`;
     let apiKey = `apikey=e88d2a55&`;
     try {
       let res = await fetch(`${baseUrl}i=${q}&${apiKey}`, {
