@@ -1,0 +1,16 @@
+
+.singleMoviePage{
+    color:rgba(255, 255, 255, 0.829);
+    width: 80vw;
+    margin-bottom: 60px;
+}
+.singleMoviePage__img{
+    height: 300px;
+    margin-top:24px;
+    border-radius: 5px;
+}
+.details__span{
+padding: 20px 4px;
+font-weight: 700;
+color:white;
+}

@@ -1,0 +1,31 @@
+.movieModal .modal-header{
+    padding:30px;
+}
+.modal-content {
+}
+.movieModal__img{
+    width: 100%;
+    margin-left:auto;
+    margin-right: auto;
+}
+
+.movieModal .close{
+  background-color: black;
+color:white;
+padding: 0px 9px 7px;
+border-radius: 100%;
+opacity: 1;
+font-weight: 200;
+}
+.movieModal  .modal-header{
+  border:0;
+  height: 60%;
+  position: relative;
+}
+.movieModal  .modal-body{
+color:white;
+background-color: black;
+}
+.movieModal .modal-footer{
+  border:0
+}
