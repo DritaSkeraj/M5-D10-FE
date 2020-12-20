@@ -19,7 +19,7 @@ class SinlgeMoviePage extends Component {
     try {
       await this.fetchMovies(this.props.match.params.id);
     } catch (e) {
-      console.log(e);
+      console.log("ERROR: ", e);
     }
   };
   fetchMovies = async (q) => {
