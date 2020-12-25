@@ -15,6 +15,8 @@ class CommentsList extends React.Component {
         }
     }
 
+    be_url = process.env.REACT_APP_BE_URL;
+
       componentDidUpdate = async (prevProp, prevState) => {
           if (prevProp.movieId !== this.props.movieId) {
               await this.setState({ movieId: this.props.movieId });
@@ -40,7 +42,7 @@ class CommentsList extends React.Component {
     let { movieId } = this.state;
     try {
       let response = await fetch(
-        `http://127.0.0.1:3000/reviews/${movieId}`, //+ movieIdtt0120737
+        `${process.env.REACT_APP_BE_URL}/reviews/${movieId}`, //+ movieIdtt0120737
         /*{
           headers: {
             Authorization:
@@ -60,7 +62,7 @@ class CommentsList extends React.Component {
     let objToDelete = id;
     try {
       let response = await fetch(
-        `http://127.0.0.1:3000/reviews/${objToDelete}`,
+        `${process.env.REACT_APP_BE_URL}/reviews/${objToDelete}`,
         {
           method: "DELETE",
           headers: new Headers({
@@ -95,16 +97,16 @@ class CommentsList extends React.Component {
         {this.state.loading && (
           <div className="font-bold d-flex justify-content-center">
             <span>Feching comments</span>
-            <Spinner animation="border" variant="success" />
+            <Spinner animation="grow" variant="danger" />
           </div>
         )}
-        {this.state.comments.map((comments, index) => (
+        {(this.state.comments.length > 0) ? this.state.comments.map((comments, index) => (
           <Comment
             key={index}
             comments={comments}
             handleDel={this.handleCommentDelete}
           />
-        ))}
+        )) : <p>There are no comments for this movie yet!</p>}
       </div>
     );
   }

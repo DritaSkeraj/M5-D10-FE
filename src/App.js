@@ -29,3 +29,6 @@ function App() {
 }
 
 export default App;
+
+
+{/*"start": "serve -s build",*/}

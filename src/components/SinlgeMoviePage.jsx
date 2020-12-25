@@ -22,11 +22,14 @@ class SinlgeMoviePage extends Component {
       console.log("ERROR: ", e);
     }
   };
+  
+  be_url = process.env.REACT_APP_BE_URL;
+
   fetchMovies = async (q) => {
-    let baseUrl = `https://www.omdbapi.com/?`;
-    let apiKey = `apikey=e88d2a55&`;
+    let baseUrl = "http://www.omdbapi.com/";
+    let apiKey = process.env.REACT_APP_API_KEY;
     try {
-      let res = await fetch(`${baseUrl}i=${q}&${apiKey}`, {
+      let res = await fetch(`${baseUrl}?i=${q}&apikey=${apiKey}`, {
         method: "GET",
       });
       if (res.ok) {
@@ -140,36 +143,6 @@ class SinlgeMoviePage extends Component {
           />
           </Col>
         </Row>
-        {/* <Row>
-          <div className="d-flex align-items-center mr-3 nav__search my-4">
-            <FormControl
-              type="text"
-              placeholder="Search Comments"
-              className="mr-sm-2"
-              onChange={(e) => this.filterComments(e)}
-            />
-            <SearchIcon />
-          </div>
-        </Row>
-        {comments.map((comment) => (
-          <SingleComment
-            id={comment._id}
-            comment={comment.comment}
-            rate={comment.rate}
-            author={comment.author}
-            key={comment._id}
-            handleDeleteComment={this.handleDeleteComment}
-          />
-        ))}
-
-        <Row className="w-100">
-          <CommentForm
-            handleSubmit={this.handleSubmit}
-            handleChange={this.handleChange}
-            comment={this.state.singleComment.comment}
-            rate={this.state.singleComment.rate}
-          />
-        </Row> */}
       </Container>
     );
   }

@@ -1,0 +1,14 @@
+.add-comment-btn{
+    background-color: black;
+    color: #bbb;
+    border-radius: 4px;
+    padding: 10px 15px;
+    margin: 0 auto;
+    display: flex;
+    justify-self: center;
+    justify-content: center;
+    border: 2px solid black;
+}
+.add-comment-btn:hover{
+    background-color: #141414;
+}

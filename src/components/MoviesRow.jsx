@@ -11,6 +11,9 @@ export default class MoviesRow extends Component {
     movies: [],
     sorted: true,
   };
+
+  be_url = process.env.REACT_APP_BE_URL;
+
   componentDidMount = async () => {
     await this.fetchMovies();
     console.log(this.state.movies);
@@ -29,7 +32,8 @@ export default class MoviesRow extends Component {
   };
 
   fetchMovies = async () => {
-    let baseUrl = `http://127.0.0.1:3000/media`;
+    let baseUrl = `${process.env.REACT_APP_BE_URL}/media`;
+    console.log("baseUrl::::::::", baseUrl);
     {/*let apiKey = `apikey=e88d2a55&`;*/}
     try {
       let res = await fetch(`${baseUrl}`, {
@@ -63,7 +67,7 @@ export default class MoviesRow extends Component {
             style={{ color: "white", cursor: "pointer" }}
           />
         </Row>
-        <Row>
+        <Row style={{maxWidth: '95vw'}}>
           {movies.map((movie) => (
             <Col
               xs={12}

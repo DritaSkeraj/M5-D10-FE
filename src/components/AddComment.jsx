@@ -1,5 +1,6 @@
 import React from 'react'
 import {Container, Row, Col, Form, Alert, Spinner} from 'react-bootstrap'
+import '../styles/AddComment.css';
 
 class AddComment extends React.Component {
   constructor(props) {
@@ -14,6 +15,8 @@ class AddComment extends React.Component {
       loading: false,
     };
   }
+
+  be_url = process.env.REACT_APP_BE_URL;
 
   componentDidUpdate = async (prevProp, prevState) => {
     if (prevProp.movieId !== this.props.movieId) {
@@ -38,7 +41,7 @@ class AddComment extends React.Component {
     this.setState({ loading: true });
     try {
       let response = await fetch(
-        `http://127.0.0.1:3000/reviews/${movieId}`,
+        `${process.env.REACT_APP_BE_URL}/reviews/${movieId}`,
         {
           method: "POST",
           body: JSON.stringify(this.state.comment),
@@ -52,7 +55,6 @@ class AddComment extends React.Component {
       
       console.log("this.state.comment::::::", this.state.comment)
       if (response.ok) {
-        alert("yayyyy! commented successfully!");
         this.setState({
           comment: {
             comment: "",
@@ -64,7 +66,7 @@ class AddComment extends React.Component {
           this.props.updateComments(true)
 
       } else {
-        console.log("an error occurred");
+        console.log("An error occurred!");
         let error = await response.json();
         this.setState({
           errMessage: error.message,
@@ -93,7 +95,7 @@ class AddComment extends React.Component {
           <div className="d-flex justify-content-center my-5">
             Adding your comment, please wait
             <div className="ml-2">
-              <Spinner animation="border" variant="success" />
+            <Spinner animation="grow" variant="danger" />
             </div>
           </div>
         )}
@@ -141,7 +143,7 @@ class AddComment extends React.Component {
               </Form.Group>
             </Col>
             <Col md={12}>
-              <button className="btn-info offset-5" type="Submit">
+              <button className="add-comment-btn offset-5" type="Submit">
                 {" "}
                 Submit{" "}
               </button>
