@@ -22,7 +22,7 @@ function App() {
           <SinlgeMoviePage />
         </Route>
       </Switch>
-      {console.log("REACT_APP_BE_URL:::::::::",REACT_APP_BE_URL)}
+      {console.log("REACT_APP_BE_URL:::::::::",process.env.REACT_APP_BE_URL)}
 
       <Footer />
     </div>
